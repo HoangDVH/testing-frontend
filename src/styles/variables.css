@@ -1,0 +1,29 @@
+:root {
+  --color-bg: #f9f4e8;
+  --color-bg-white: #ffffff;
+  --color-text: #2d1a12;
+  --color-text-muted: #6b5c54;
+  --color-text-light: #f9f4e8;
+  --color-accent: #a04020;
+  --color-gold: #c5a059;
+  --color-gold-hover: #b8924f;
+  --color-dark: #1c1917;
+  --color-footer: #2b231d;
+  --color-hero-green: #2d4236;
+  --color-border: #e8dfd0;
+  --color-search-bg: #f0ebe0;
+
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --container-max: 1140px;
+  --header-height: 72px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(45, 26, 18, 0.06);
+  --shadow-md: 0 4px 20px rgba(45, 26, 18, 0.1);
+  --transition: 0.25s ease;
+}

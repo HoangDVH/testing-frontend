@@ -1,0 +1,180 @@
+.sign-in-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.sign-in-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(45, 26, 18, 0.45);
+  border: none;
+}
+
+.sign-in-modal__dialog {
+  position: relative;
+  width: min(100%, 420px);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: 2rem 2rem 1.75rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.sign-in-modal__dialog--tall {
+  width: min(100%, 440px);
+}
+
+.sign-in-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.sign-in-modal__close:hover {
+  color: var(--color-text);
+}
+
+.sign-in-modal__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-text-light);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.sign-in-modal__title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.sign-in-modal__subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 1.75rem;
+}
+
+.sign-in-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sign-in-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sign-in-modal__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.sign-in-modal__input {
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-white);
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.sign-in-modal__input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+}
+
+.sign-in-modal__submit {
+  margin-top: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: var(--color-accent);
+  color: var(--color-text-light);
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: background var(--transition);
+}
+
+.sign-in-modal__submit:hover {
+  background: #8a3828;
+}
+
+.sign-in-modal__error {
+  font-size: 0.8125rem;
+  color: #b44a4a;
+  text-align: center;
+}
+
+.sign-in-modal__footer {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.sign-in-modal__footer-link {
+  color: var(--color-accent);
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  transition: opacity var(--transition);
+}
+
+.sign-in-modal__footer-link:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 480px) {
+  .sign-in-modal {
+    padding: 1rem;
+  }
+
+  .sign-in-modal__dialog {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .sign-in-modal__title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-height: 640px) {
+  .sign-in-modal {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-block: 1rem;
+  }
+}
