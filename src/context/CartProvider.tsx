@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback, type ReactNode } from "react";
+import toast from "react-hot-toast";
 import { catalogBooks } from "../data/siteData";
 import { CartContext, type CartItem } from "./cartContext";
 
@@ -20,6 +21,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const subtotal = useMemo(() => getSubtotal(items), [items]);
 
   const addItem = useCallback((bookId: string) => {
+    const book = catalogBooks.find((entry) => entry.id === bookId);
+
     setItems((prev) => {
       const existing = prev.find((item) => item.bookId === bookId);
       if (existing) {
@@ -31,6 +34,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { bookId, quantity: 1 }];
     });
+
+    toast.success(
+      book ? `"${book.title}" added to your bag` : "Added to your bag",
+    );
   }, []);
 
   const removeItem = useCallback((bookId: string) => {
@@ -50,9 +57,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const clearCart = useCallback(() => {
+    setItems([]);
+  }, []);
+
   return (
     <CartContext.Provider
-      value={{ items, count, subtotal, addItem, removeItem, updateQuantity }}
+      value={{ items, count, subtotal, addItem, removeItem, updateQuantity, clearCart }}
     >
       {children}
     </CartContext.Provider>

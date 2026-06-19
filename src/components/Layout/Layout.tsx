@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SignInModal from "../SignInModal/SignInModal";
 import SignUpModal from "../SignUpModal/SignUpModal";
+import ToastProvider from "../Toast/ToastProvider";
 
 export default function Layout() {
   const location = useLocation();
@@ -29,6 +30,7 @@ export default function Layout() {
       <Footer />
       <SignInModal />
       <SignUpModal />
+      <ToastProvider />
     </>
   );
 }

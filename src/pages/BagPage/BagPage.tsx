@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { catalogBooks } from "../../data/siteData";
 import { useCart } from "../../hooks/useCart";
@@ -10,15 +11,16 @@ function formatPrice(amount: number) {
   return `$${amount.toFixed(2)}`;
 }
 
-export default function BagPage() {
-  const { items, count, subtotal, removeItem, updateQuantity } = useCart();
-  const { openSignIn, isSignedIn } = useAuth();
-  const [checkoutItemCount, setCheckoutItemCount] = useState<number | null>(null);
+interface OrderSummary {
+  itemCount: number;
+  total: number;
+}
 
-  const checkoutMessage =
-    checkoutItemCount !== null && checkoutItemCount === count && count > 0
-      ? "Thanks! Your order has been placed (demo)."
-      : null;
+export default function BagPage() {
+  const { items, count, subtotal, removeItem, updateQuantity, clearCart } = useCart();
+  const { openSignIn, isSignedIn } = useAuth();
+  const [orderComplete, setOrderComplete] = useState(false);
+  const [orderSummary, setOrderSummary] = useState<OrderSummary | null>(null);
 
   const cartEntries = items
     .map((item) => {
@@ -34,7 +36,44 @@ export default function BagPage() {
       return;
     }
 
-    setCheckoutItemCount(count);
+    setOrderSummary({ itemCount: count, total: subtotal });
+    clearCart();
+    setOrderComplete(true);
+    toast.success("Thanks! Your order has been placed.");
+  }
+
+  if (orderComplete && orderSummary) {
+    return (
+      <div className="bag-page">
+        <div className="container">
+          <Breadcrumbs
+            items={[
+              { label: "Home", to: "/" },
+              { label: "Bag", to: "/bag" },
+              { label: "Thank you" },
+            ]}
+          />
+
+          <div className="bag-page__success">
+            <span className="bag-page__success-icon" aria-hidden="true">
+              ✓
+            </span>
+            <h1 className="bag-page__success-title">Thank you for your purchase!</h1>
+            <p className="bag-page__success-text">
+              Your order of {orderSummary.itemCount}{" "}
+              {orderSummary.itemCount === 1 ? "item" : "items"} (
+              {formatPrice(orderSummary.total)}) has been placed successfully.
+            </p>
+            <p className="bag-page__success-note">
+              This is a demo checkout — no payment was processed.
+            </p>
+            <Link to="/books" className="bag-page__success-link">
+              Continue shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -131,12 +170,6 @@ export default function BagPage() {
               >
                 Checkout
               </button>
-
-              {checkoutMessage && (
-                <p className="bag-summary__success" role="status">
-                  {checkoutMessage}
-                </p>
-              )}
 
               <p className="bag-summary__note">
                 You'll be asked to sign in to complete your order.
